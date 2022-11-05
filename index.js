@@ -52,10 +52,37 @@ console.log('Task 1: ', person1,'\n toString: ', person1.toString(), '\n');
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, mpg) {
+  this.model = model;
+  this.milesPerGallon = mpg;
+  this.tank = 0;
+  this.odometer = 0;
+  
 }
-
+Car.prototype.fill = function(gallons) {
+  this.tank += gallons;
+}
+Car.prototype.drive = function(distance) {
+  const costPerMile = 1 / this.milesPerGallon;
+  if (this.tank === 0) {
+    return `I ran out of fuel at ${this.odometer} miles!`;
+  }
+  for (let i = 0; i <= distance; i++) {
+    this.odometer++;
+    this.tank -= costPerMile.toFixed(4);
+    if (this.tank <= 0) {
+      this.tank += costPerMile;
+      this.odometer--;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
+  }
+  // this.odometer += distance;
+  // this.tank -= distance / this.milesPerGallon;
+  return `I drove ${distance} miles!`;
+}
+const car1 = new Car('Honda', 30);
+car1.fill(10);
+console.log('Task 2: ', car1, car1.drive(1000),);
 
 /*
   TASK 3
@@ -73,10 +100,10 @@ function Baby() {
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. refers to an object
+  2. the object it refers to is decided by where this is called
+  3. if this is not called in a function, it refers to the window
+  4. this can be implicitly or explicitly defined using call or bind
 */
 
 ///////// END OF CHALLENGE /////////
