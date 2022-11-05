@@ -92,10 +92,18 @@ console.log('Task 2: ', car1, car1.drive(1000),);
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
-
+function Baby(name, age, favToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favToy;
 }
 
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function() {
+  return `Playing with ${this.favoriteToy}`;
+}
+const baby1 = new Baby('Mary', 50, 'ball');
+console.log('Task 3: ', baby1, '\n', baby1.play(),);
 
 /* 
   TASK 4
